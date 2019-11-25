@@ -66,6 +66,24 @@ public class MessageEventHandler {
         client.sendEvent("login", jsonpObject);
     }
 
+
+    /**
+     * 刷新数据库接口
+     *
+     * @param client  　客户端信息
+     * @param request 请求信息
+     * @param data    　客户端发送数据
+     */
+    @OnEvent(value = "refreshData")
+    public void onRefreshDataEvent(SocketIOClient client, AckRequest request, String data) {
+        logger.info("===onRefreshDataEvent====" + data);
+        //回发消息
+        JSONObject jsonpObject = new JSONObject();
+        jsonpObject.put("numUsers", data);
+        client.sendEvent("refreshData", jsonpObject);
+    }
+
+
     /**
      * 广播消息
      */
