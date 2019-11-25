@@ -68,7 +68,7 @@ public class MessageEventHandler {
 
 
     /**
-     * 刷新数据库接口
+     * 刷新数据库接口(用于小批量数据更新)
      *
      * @param client  　客户端信息
      * @param request 请求信息
@@ -81,6 +81,22 @@ public class MessageEventHandler {
         JSONObject jsonpObject = new JSONObject();
         jsonpObject.put("numUsers", data);
         client.sendEvent("refreshData", jsonpObject);
+    }
+
+    /**
+     * 覆盖数据库接口(用于数据库文件更新)
+     *
+     * @param client  　客户端信息
+     * @param request 请求信息
+     * @param data    　客户端发送数据
+     */
+    @OnEvent(value = "replaceData")
+    public void onReplaceDataEvent(SocketIOClient client, AckRequest request, String data) {
+        logger.info("===onReplaceDataEvent====" + data);
+        //回发消息
+        JSONObject jsonpObject = new JSONObject();
+        jsonpObject.put("type", data);
+        client.sendEvent("replaceData", jsonpObject);
     }
 
 
