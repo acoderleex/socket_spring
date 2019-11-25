@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,12 +16,14 @@ public class DemoApplication implements CommandLineRunner {
         SpringApplication.run(DemoApplication.class, args);
     }
 
+    protected static Logger logger = LoggerFactory.getLogger(TonyUdpServer.class);
+
     @Autowired
     private TonyUdpServer udpServer;
 
     @Override
     public void run(String... args) throws Exception {
         udpServer.start();
-        log.info("socket.io启动成功！");
+        logger.info("socket.io启动成功！");
     }
 }

@@ -59,7 +59,7 @@ public class MessageEventHandler {
      */
     @OnEvent(value = "add user")
     public void onAddUserEvent(SocketIOClient client, AckRequest request, String data) {
-        logger.info("===onAddUserEvent====：" + data);
+        logger.info("===onAddUserEvent====" + data);
         //回发消息
         JSONObject jsonpObject = new JSONObject();
         jsonpObject.put("numUsers", 1);

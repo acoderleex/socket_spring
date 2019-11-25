@@ -20,9 +20,9 @@
             </pattern>
         </encoder>
 
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/home/yoyo/log/key/info.%d.log</fileNamePattern>
-        </rollingPolicy>
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            <fileNamePattern>/home/yoyo/log/key/info.%d.log</fileNamePattern>-->
+<!--        </rollingPolicy>-->
 
         <!-- 追加方式记录日志 -->
         <append>true</append>
@@ -49,9 +49,9 @@
             </pattern>
         </encoder>
 
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/home/yoyo/log/key/error.%d.log</fileNamePattern>
-        </rollingPolicy>
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            <fileNamePattern>/home/yoyo/log/key/error.%d.log</fileNamePattern>-->
+<!--        </rollingPolicy>-->
 
         <!-- 追加方式记录日志 -->
         <append>true</append>

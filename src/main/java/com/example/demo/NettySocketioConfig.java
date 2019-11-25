@@ -6,6 +6,8 @@ import com.corundumstudio.socketio.SocketConfig;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +19,8 @@ import java.net.UnknownHostException;
 @Configuration
 @Slf4j
 public class NettySocketioConfig {
+
+    protected static Logger logger = LoggerFactory.getLogger(TonyUdpServer.class);
 
 
     @Value("${socketio.port}")
@@ -51,7 +55,7 @@ public class NettySocketioConfig {
         com.corundumstudio.socketio.Configuration config = new com.corundumstudio.socketio.Configuration();
         config.setSocketConfig(socketConfig);
         String localIP = getLocalIP();
-        log.info("===localIP====" + localIP);
+        logger.info("===localIP====" + localIP);
         config.setHostname(localIP);
         config.setPort(port);
         config.setBossThreads(bossCount);
