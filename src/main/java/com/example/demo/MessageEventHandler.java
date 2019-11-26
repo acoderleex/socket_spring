@@ -20,10 +20,10 @@ import java.util.concurrent.ConcurrentMap;
 @Slf4j
 public class MessageEventHandler {
 
-    protected static Logger logger = LoggerFactory.getLogger(TonyUdpServer.class);
+    private static Logger logger = LoggerFactory.getLogger(TonyUdpServer.class);
 
 
-    public static ConcurrentMap<String, SocketIOClient> socketIOClientMap = new ConcurrentHashMap<>();
+    private static ConcurrentMap<String, SocketIOClient> socketIOClientMap = new ConcurrentHashMap<>();
 
 
     /**
@@ -60,10 +60,9 @@ public class MessageEventHandler {
     @OnEvent(value = "add user")
     public void onAddUserEvent(SocketIOClient client, AckRequest request, String data) {
         logger.info("===onAddUserEvent====" + data);
-        //回发消息
         JSONObject jsonpObject = new JSONObject();
         jsonpObject.put("numUsers", 1);
-        client.sendEvent("login", jsonpObject);
+        sendBroadcast("login", jsonpObject);
     }
 
 
@@ -77,10 +76,9 @@ public class MessageEventHandler {
     @OnEvent(value = "refreshData")
     public void onRefreshDataEvent(SocketIOClient client, AckRequest request, String data) {
         logger.info("===onRefreshDataEvent====" + data);
-        //回发消息
         JSONObject jsonpObject = new JSONObject();
         jsonpObject.put("numUsers", data);
-        client.sendEvent("refreshData", jsonpObject);
+        sendBroadcast("refreshAction", jsonpObject);
     }
 
     /**
@@ -96,21 +94,20 @@ public class MessageEventHandler {
         //回发消息
         JSONObject jsonpObject = new JSONObject();
         jsonpObject.put("type", data);
-        client.sendEvent("replaceData", jsonpObject);
+        sendBroadcast("replaceAction", jsonpObject);
+
     }
 
 
     /**
      * 广播消息
      */
-    public void sendBroadcast() {
+    private void sendBroadcast(String event, JSONObject data) {
         for (SocketIOClient client : socketIOClientMap.values()) {
             if (client.isChannelOpen()) {
-                client.sendEvent("Broadcast", "当前时间", System.currentTimeMillis());
+                logger.info("===sendBroadcast====" + client.getRemoteAddress().toString());
+                client.sendEvent(event, "当前时间", System.currentTimeMillis());
             }
         }
-
     }
-
-
 }
