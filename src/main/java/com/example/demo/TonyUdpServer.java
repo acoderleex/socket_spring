@@ -21,7 +21,7 @@ public class TonyUdpServer {
     private DatagramSocket socket;
     private DatagramPacket packet = null;
 
-    protected static Logger logger = LoggerFactory.getLogger(TonyUdpServer.class);
+    private static Logger logger = LoggerFactory.getLogger(TonyUdpServer.class);
 
 
     @Autowired

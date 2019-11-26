@@ -16,7 +16,7 @@ public class DemoApplication implements CommandLineRunner {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    protected static Logger logger = LoggerFactory.getLogger(TonyUdpServer.class);
+    private static Logger logger = LoggerFactory.getLogger(TonyUdpServer.class);
 
     @Autowired
     private TonyUdpServer udpServer;
